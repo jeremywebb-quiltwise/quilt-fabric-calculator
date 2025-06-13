@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Default scrolling for all pages */
+html, body {
+  height: 100vh;
+}
+
+#root {
+  height: 100vh;
+}
+
+/* Lock scrolling only for studio page */
+.studio-page {
+  overflow: hidden;
+}
+
+.studio-page html, 
+.studio-page body,
+.studio-page #root {
+  overflow: hidden;
+}
+
+:root {
+  --background: hsl(44, 57%, 97%);
+  --foreground: hsl(210, 10%, 29%);
+  --muted: hsl(44, 57%, 95%);
+  --muted-foreground: hsl(210, 5%, 45%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(210, 10%, 29%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(210, 10%, 29%);
+  --border: hsl(44, 12%, 88%);
+  --input: hsl(44, 12%, 88%);
+  --primary: hsl(14, 31%, 40%);
+  --primary-foreground: hsl(0, 0%, 98%);
+  --secondary: hsl(44, 57%, 95%);
+  --secondary-foreground: hsl(210, 15%, 15%);
+  --accent: hsl(44, 57%, 95%);
+  --accent-foreground: hsl(210, 15%, 15%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(14, 31%, 40%);
+  --radius: 0.75rem;
+  
+  /* Custom quilt color palette */
+  --terracotta: hsl(14, 31%, 40%);
+  --wheat: hsl(37, 43%, 60%);
+  --sage: hsl(128, 13%, 48%);
+  --cream: hsl(44, 57%, 97%);
+  --charcoal: hsl(210, 10%, 29%);
+}
+
+.dark {
+  --background: hsl(210, 40%, 8%);
+  --foreground: hsl(0, 0%, 95%);
+  --muted: hsl(210, 40%, 12%);
+  --muted-foreground: hsl(210, 5%, 60%);
+  --popover: hsl(210, 40%, 8%);
+  --popover-foreground: hsl(0, 0%, 95%);
+  --card: hsl(210, 40%, 8%);
+  --card-foreground: hsl(0, 0%, 95%);
+  --border: hsl(210, 40%, 12%);
+  --input: hsl(210, 40%, 12%);
+  --primary: hsl(14, 31%, 50%);
+  --primary-foreground: hsl(0, 0%, 98%);
+  --secondary: hsl(210, 40%, 12%);
+  --secondary-foreground: hsl(0, 0%, 95%);
+  --accent: hsl(210, 40%, 12%);
+  --accent-foreground: hsl(0, 0%, 95%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(14, 31%, 50%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .quilt-grid {
+    display: grid;
+    gap: 1px;
+    background-color: hsl(var(--border));
+    border-radius: var(--radius);
+    padding: 4px;
+  }
+  
+  .quilt-cell {
+    aspect-ratio: 1;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .quilt-cell:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .quilt-block {
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .drag-preview {
+    transform: rotate(5deg);
+    opacity: 0.8;
+  }
+  
+  .drop-zone {
+    border: 2px dashed hsl(var(--primary));
+    background-color: hsl(var(--primary) / 0.05);
+  }
+  
+  .drop-zone-active {
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--primary) / 0.1);
+  }
+}
+
+@layer utilities {
+  .text-terracotta {
+    color: hsl(var(--terracotta));
+  }
+  
+  .bg-terracotta {
+    background-color: hsl(var(--terracotta));
+  }
+  
+  .border-terracotta {
+    border-color: hsl(var(--terracotta));
+  }
+  
+  .text-wheat {
+    color: hsl(var(--wheat));
+  }
+  
+  .bg-wheat {
+    background-color: hsl(var(--wheat));
+  }
+  
+  .text-sage {
+    color: hsl(var(--sage));
+  }
+  
+  .bg-sage {
+    background-color: hsl(var(--sage));
+  }
+  
+  .bg-cream {
+    background-color: hsl(var(--cream));
+  }
+  
+  .text-charcoal {
+    color: hsl(var(--charcoal));
+  }
+}
+
+/* Design Studio Styles */
+.quilt-grid {
+  display: grid;
+  gap: 1px;
+  background-color: #e5e7eb;
+  padding: 1px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.quilt-cell {
+  background-color: white;
+  min-height: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.quilt-cell:hover {
+  z-index: 10;
+}
+
+/* Custom scrollbar */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Print styles */
+@media print {
+  @page {
+    margin: 1in;
+    size: letter;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+    color: #000 !important;
+    background: white !important;
+  }
+  
+  /* Hide navigation and other UI elements */
+  nav, header, footer, .no-print {
+    display: none !important;
+  }
+  
+  /* Hide form controls when printing */
+  form, .form-container, button:not(.print-button) {
+    display: none !important;
+  }
+  
+  /* Show only the results section */
+  .calculation-results {
+    display: block !important;
+    page-break-inside: avoid;
+  }
+  
+  /* Ensure good contrast for printing */
+  .text-terracotta {
+    color: #8B4513 !important;
+  }
+  
+  .text-charcoal {
+    color: #2D3748 !important;
+  }
+  
+  .text-sage {
+    color: #4A5568 !important;
+  }
+  
+  /* Clean up backgrounds for printing */
+  .bg-cream, .bg-sage\/10, .bg-terracotta\/10 {
+    background-color: #f8f9fa !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+  
+  /* Shopping list checkboxes */
+  .shopping-list {
+    page-break-inside: avoid;
+  }
+  
+  /* Ensure proper spacing */
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Hide decorative elements */
+  .lucide {
+    display: none !important;
+  }
+}
